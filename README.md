@@ -2,11 +2,16 @@
 Cake Addin for code generation from OpenAPI specifications via [NSwag](https://github.com/RicoSuter/NSwag)
 
 ## Motivation
+NSwag provides a set of powerful code generators for both C# and TypeScript. Because code generation is task that can easily be automated, being able to run it directly from a build tool like Cake can help to save a lot of time and effort.
+
+A Cake Addin for NSwag does already exist (see [Cake.NSwag](https://github.com/agc93/Cake.NSwag)), but sadly, it is outdated and unmaintained. For this addin, I'll do my best to keep it up-to-date both regarding Cake best practices and NSwag code generation features.
 
 ## Installation
 The addin is available on NuGet, so it can simply be registered in your `build.cake` file via the `#addin` preprocessor directive:
 
     #addin nuget:?package=Cake.CodeGen.OpenAPI&version=1.0.0
+
+There is no need to install any additional tools or dependencies.
 
 ## Usage
 When the addin is registered, it adds an extension property called `NSwag` to the context of the `build.cake` script. This property provides various methods to define an OpenAPI specification source. Using the returned object, clients for C# and TypeScript can be generated as well as ASP.NET controller templates:
