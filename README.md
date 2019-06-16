@@ -4,7 +4,7 @@ Cake Addin for code generation from OpenAPI specifications via [NSwag](https://g
 ## Motivation
 
 ## Installation
-Since the addin is available on NuGet, it can simply be registered in your build.cake file via the #addin preprocessor directive:
+The addin is available on NuGet, so it can simply be registered in your `build.cake` file via the `#addin` preprocessor directive:
 
     #addin nuget:?package=Cake.CodeGen.OpenAPI&version=1.0.0
 
