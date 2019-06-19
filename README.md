@@ -9,19 +9,23 @@ A Cake Addin for NSwag does already exist (see [Cake.NSwag](https://github.com/a
 ## Installation
 The addin is available on NuGet, so it can simply be registered in your `build.cake` file via the `#addin` preprocessor directive:
 
-    #addin nuget:?package=Cake.CodeGen.OpenAPI&version=1.0.0
+``` csharp
+#addin nuget:?package=Cake.CodeGen.OpenAPI&version=1.0.0
+```
 
 There is no need to install any additional tools or dependencies.
 
 ## Usage
 When the addin is registered, it adds an extension property called `NSwag` to the context of the `build.cake` script. This property provides various methods to define an OpenAPI specification source. Using the returned object, clients for C# and TypeScript can be generated as well as ASP.NET controller templates:
 
-    NSwag.FromYamlSpecification("swagger.yaml")                    // or FromJsonSpecification("swagger.json")
-        .GenerateCSharpClient("Client.Generated.cs")
-        .GenerateTypeScriptClient("client-generated.ts", new TypeScriptClientGeneratorSettings() {
-            ClassName = "MyGeneratedClient"
-        })
-        .GenerateCSharpController("Controller.Generated.cs");
+``` csharp
+NSwag.FromYamlSpecification("swagger.yaml")                    // or FromJsonSpecification("swagger.json")
+    .GenerateCSharpClient("Client.Generated.cs")
+    .GenerateTypeScriptClient("client-generated.ts", new TypeScriptClientGeneratorSettings() {
+        ClassName = "MyGeneratedClient"
+    })
+    .GenerateCSharpController("Controller.Generated.cs");
+```
 
 For details on the optional generator settings check out the NSwag documentation. Multiple invocations of the same code generator (e.g. `GenerateCSharpClient`) with different settings and different output files are possible.
 
