@@ -7,7 +7,7 @@ NSwag provides a set of powerful code generators for both C# and TypeScript. Bec
 A Cake Addin for NSwag does already exist (see [Cake.NSwag](https://github.com/agc93/Cake.NSwag)), but sadly, it is outdated and unmaintained. For this addin, I'll do my best to keep it up-to-date both regarding Cake best practices and NSwag code generation features.
 
 ## Installation
-The addin is available on NuGet, so it can simply be registered in your `build.cake` file via the `#addin` preprocessor directive:
+The addin is [available on NuGet](https://www.nuget.org/packages/Cake.CodeGen.Nswag), so it can simply be registered in your `build.cake` file via the `#addin` preprocessor directive:
 
 ``` csharp
 #addin nuget:?package=Cake.CodeGen.NSwag&version=1.0.0&loaddependencies=true
