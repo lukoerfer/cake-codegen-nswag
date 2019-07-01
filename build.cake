@@ -17,7 +17,7 @@ Task("Build")
 	DotNetCoreBuild(solution);
 });
 
-Task("Create-Nuget")
+Task("Pack")
 	.IsDependentOn("Build")
 	.Does(() =>
 {
@@ -26,13 +26,13 @@ Task("Create-Nuget")
 	});
 });
 
-Task("Publish-Nuget")
-	.IsDependentOn("Create-Nuget")
+Task("Push")
+	.IsDependentOn("Pack")
 	.Does(() => 
 {
 	var packages = GetFiles("./artifacts/nuget/*.nupkg");
 	NuGetPush(packages, new NuGetPushSettings() {
-		 Source = @"C:\Users\Koerfer\.nuget\packages"
+		 Source = "https://api.nuget.org/v3/index.json"
 	});
 });
 
