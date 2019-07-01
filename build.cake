@@ -11,10 +11,22 @@ Task("Clean")
 	CleanDirectories("./src/**/obj");
 });
 
-Task("Build")
+Task("Restore")
 	.Does(() =>
 {
-	DotNetCoreBuild(solution);
+	DotNetCoreRestore(solution, new DotNetCoreRestoreSettings() {
+		Verbosity = DotNetCoreVerbosity.Quiet
+	});
+});
+
+Task("Build")
+	.IsDependentOn("Restore")
+	.Does(() =>
+{
+	DotNetCoreBuild(solution, new DotNetCoreBuildSettings() {
+		NoRestore = true,
+		Verbosity = DotNetCoreVerbosity.Quiet
+	});
 });
 
 Task("Pack")
@@ -22,7 +34,10 @@ Task("Pack")
 	.Does(() =>
 {
 	DotNetCorePack(project, new DotNetCorePackSettings() {
-		OutputDirectory = "./artifacts/nuget"
+		NoRestore = true,
+		NoBuild = true,
+		OutputDirectory = "./artifacts/nuget",
+		Verbosity = DotNetCoreVerbosity.Quiet
 	});
 });
 
@@ -31,6 +46,7 @@ Task("Push")
 	.Does(() => 
 {
 	var packages = GetFiles("./artifacts/nuget/*.nupkg");
+
 	NuGetPush(packages, new NuGetPushSettings() {
 		 Source = "https://api.nuget.org/v3/index.json"
 	});

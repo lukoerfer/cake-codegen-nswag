@@ -6,16 +6,17 @@ namespace Cake.CodeGen.NSwag
     [CakeAliasCategory("NSwag")]
     public static class NSwagAliases
     {
-        private static NSwagSources Runner;
-
-        [CakePropertyAlias]
+        [CakePropertyAlias(Cache = true)]
+        [CakeNamespaceImport("NSwag.CodeGeneration")]
+        [CakeNamespaceImport("NSwag.CodeGeneration.Models")]
+        [CakeNamespaceImport("NSwag.CodeGeneration.OperationNameGenerators")]
+        [CakeNamespaceImport("NSwag.CodeGeneration.CSharp")]
+        [CakeNamespaceImport("NSwag.CodeGeneration.CSharp.Models")]
+        [CakeNamespaceImport("NSwag.CodeGeneration.TypeScript")]
+        [CakeNamespaceImport("NSwag.CodeGeneration.TypeScript.Models")]
         public static NSwagSources NSwag(this ICakeContext context)
         {
-            if (Runner == null)
-            {
-                Runner = new NSwagSources(context);
-            }
-            return Runner;
+            return new NSwagSources(context);
         }
 
     }

@@ -3,6 +3,7 @@ using System.IO;
 
 using Cake.Core;
 using Cake.Core.IO;
+using Cake.Common.IO;
 
 using NSwag;
 using NSwag.CodeGeneration.CSharp;
@@ -36,10 +37,22 @@ namespace Cake.CodeGen.NSwag
         /// <param name="outputFile"></param>
         /// <param name="handler"></param>
         /// <returns></returns>
-        public NSwagRunner GenerateCSharpClient(FilePath outputFile, Action<CSharpClientGeneratorSettings> handler = null)
+        public NSwagRunner GenerateCSharpClient(FilePath outputFile, Action<CSharpClientGeneratorSettings> handler)
         {
             var settings = new CSharpClientGeneratorSettings();
             handler?.Invoke(settings);
+            return GenerateCSharpClient(outputFile, settings);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="outputFile"></param>
+        /// <param name="settings"></param>
+        /// <returns></returns>
+        public NSwagRunner GenerateCSharpClient(FilePath outputFile, CSharpClientGeneratorSettings settings = null)
+        {
+            settings = settings ?? new CSharpClientGeneratorSettings();
             var generator = new CSharpClientGenerator(Document, settings);
             WriteToFile(outputFile, generator.GenerateFile());
             return this;
@@ -51,10 +64,22 @@ namespace Cake.CodeGen.NSwag
         /// <param name="outputFile"></param>
         /// <param name="handler"></param>
         /// <returns></returns>
-        public NSwagRunner GenerateTypeScriptClient(FilePath outputFile, Action<TypeScriptClientGeneratorSettings> handler = null)
+        public NSwagRunner GenerateTypeScriptClient(FilePath outputFile, Action<TypeScriptClientGeneratorSettings> handler)
         {
             var settings = new TypeScriptClientGeneratorSettings();
             handler?.Invoke(settings);
+            return GenerateTypeScriptClient(outputFile, settings);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="outputFile"></param>
+        /// <param name="settings"></param>
+        /// <returns></returns>
+        public NSwagRunner GenerateTypeScriptClient(FilePath outputFile, TypeScriptClientGeneratorSettings settings = null)
+        {
+            settings = settings ?? new TypeScriptClientGeneratorSettings();
             var generator = new TypeScriptClientGenerator(Document, settings);
             WriteToFile(outputFile, generator.GenerateFile());
             return this;
@@ -66,10 +91,22 @@ namespace Cake.CodeGen.NSwag
         /// <param name="outputFile"></param>
         /// <param name="handler"></param>
         /// <returns></returns>
-        public NSwagRunner GenerateCSharpController(FilePath outputFile, Action<CSharpControllerGeneratorSettings> handler = null)
+        public NSwagRunner GenerateCSharpController(FilePath outputFile, Action<CSharpControllerGeneratorSettings> handler)
         {
             var settings = new CSharpControllerGeneratorSettings();
             handler?.Invoke(settings);
+            return GenerateCSharpController(outputFile, settings);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="outputFile"></param>
+        /// <param name="settings"></param>
+        /// <returns></returns>
+        public NSwagRunner GenerateCSharpController(FilePath outputFile, CSharpControllerGeneratorSettings settings = null)
+        {
+            settings = settings ?? new CSharpControllerGeneratorSettings();
             var generator = new CSharpControllerGenerator(Document, settings);
             WriteToFile(outputFile, generator.GenerateFile());
             return this;
@@ -77,6 +114,7 @@ namespace Cake.CodeGen.NSwag
 
         private void WriteToFile(FilePath file, string content)
         {
+            Context.EnsureDirectoryExists(file.GetDirectory());
             using (var writer = new StreamWriter(Context.FileSystem.GetFile(file).OpenWrite()))
             {
                 writer.Write(content);
