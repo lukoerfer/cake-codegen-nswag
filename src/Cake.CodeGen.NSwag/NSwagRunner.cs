@@ -114,7 +114,11 @@ namespace Cake.CodeGen.NSwag
 
         private void WriteToFile(FilePath file, string content)
         {
-            Context.EnsureDirectoryExists(file.GetDirectory());
+            DirectoryPath directory = file.GetDirectory();
+            if (!string.IsNullOrWhiteSpace(directory.FullPath))
+            {
+                Context.EnsureDirectoryExists(directory);
+            }
             using (var writer = new StreamWriter(Context.FileSystem.GetFile(file).OpenWrite()))
             {
                 writer.Write(content);

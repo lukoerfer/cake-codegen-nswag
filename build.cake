@@ -48,7 +48,7 @@ Task("Push")
 	var packages = GetFiles("./artifacts/nuget/*.nupkg");
 
 	NuGetPush(packages, new NuGetPushSettings() {
-		 Source = "https://api.nuget.org/v3/index.json"
+		Source = "https://api.nuget.org/v3/index.json"
 	});
 });
 

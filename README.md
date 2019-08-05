@@ -10,7 +10,7 @@ A Cake Addin for NSwag does already exist (see [Cake.NSwag](https://github.com/a
 The addin is [available on NuGet](https://www.nuget.org/packages/Cake.CodeGen.Nswag), so it can simply be registered in your `build.cake` file via the `#addin` preprocessor directive:
 
 ``` csharp
-#addin nuget:?package=Cake.CodeGen.NSwag&version=1.0.0&loaddependencies=true
+#addin nuget:?package=Cake.CodeGen.NSwag&version=1.2.0&loaddependencies=true
 ```
 
 There is no need to install any additional tools or dependencies.

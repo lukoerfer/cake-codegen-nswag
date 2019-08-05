@@ -10,7 +10,7 @@
     <RepositoryUrl>https://github.com/lukoerfer/cake-codegen-nswag.git</RepositoryUrl>
     <PackageTags>cake code-generation openapi nswag</PackageTags>
     <RepositoryType>git</RepositoryType>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <Description>Cake Addin for code generation from OpenAPI specifications via NSwag</Description>
   </PropertyGroup>
 
